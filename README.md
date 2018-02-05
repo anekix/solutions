@@ -24,7 +24,7 @@ Relation between ***Risk*** and ***Insurer***
 
 `(A JUNCTION TABLE TO REPRESENT M-T-M relationship between ***Risk Type*** & ***Insurer***)`
 
-| RiskID | InsurerID|
+| RiskID (FK) | InsurerID (FK)|
 |-----------|-------------|
 | I1        | R1          |
 | I1        | R2          |
