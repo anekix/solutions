@@ -70,15 +70,6 @@ class FormData(Base):
     field_id = Column(Integer, ForeignKey("field.field_id"))
     field_value = Column(String(30))
 
-# class RiskData(Base):
-#     __tablename__ = "riskData"
-#     riskId = Column(Integer, ForeignKey("risk.risk_id"))
-#     insurerId = Column(Integer, ForeignKey("insurer.id"))
-#     # uid = Column(Integer, ForeignKey("insurer.id"), primary_key=True)
-#     fields = Column(String(10), primary_key=True)
-#     typeId = Column(Integer, ForeignKey("field.type_id"))
-#     order = Column(Integer)
-
 
 ################################################################
 # Part Below creates a database with dummy values
