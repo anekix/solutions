@@ -36,7 +36,7 @@ Now Every Instance of ***Risk Type*** can have multiple instances of a ***Form**
 
 Ex - For a ***Risk Type*** `House` , `Honda` might need a particular set of fields( data to be collected from insurance bearer) whereas `Bajaj` Can have a completely different set of fields for the same ***Risk Type***. so we capture this relation as
 
-|InsurerID   | RiskID | FormID    |
+|InsurerID   | RiskID | FormID   |
 |-----------|--------|-----------|
 | I1        | R1     |FOMR_1     |
 | I1        | R2     |FORM_2     |
@@ -61,5 +61,5 @@ A seperate table for fields types removes ***Deletion anomly*** That could have 
 
 
 
-
+Every **Field** is associated
 
