@@ -45,3 +45,21 @@ Ex - For a ***Risk Type*** `House` , `Honda` might need a particular set of fiel
 
 
 
+
+
+We want to allow only ceratin types of fields( like `TEXT`, `NUMBER`, `DATE`, `ENUM` to present in FORMS so we create  a Table representing ***Field Types***  
+   
+           ( FIELD TYPE)
+| TypeID (PK)  | TypeName (ENUM)|
+|-----------|--------------|
+| T1        | TEXT         |
+| T2        | NUMBER       |
+| T3        | DATE         |
+| T4        | ENUM         |
+
+A seperate table for fields types removes ***Deletion anomly*** That could have happened.
+
+
+
+
+
