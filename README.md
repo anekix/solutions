@@ -7,24 +7,41 @@ There can be N number of ***Insurers*** and each ***Insurers*** can provide poli
 also A single ***Risk Type*** can be common to multiple ***Insurers***, This is a ***Many-To-Many*** 
 Relation between ***Risk*** and ***Insurer***
 
+           (INSURER)        
 | InsurerID | InsurerName |
 |-----------|-------------|
-| I1         | Honda       |
-| I2         | Bajaj       |
-| I3         | Mahindra    |
+| I1         | Honda      |
+| I2         | Bajaj      |
+| I3         | Mahindra   |
 
-| RiskID | RiskType |
+
+         (RISK)
+| RiskID | RiskType       |
 |-----------|-------------|
-| R1         | Car       |
-| R2         | House       |
-| R3         | Prize    |
+| R1         | Car        |
+| R2         | House      |
+| R3         | Prize      |
 
-A JUNCTION TABLE TO REPRESENT M-T-M relationship between ***Risk Type*** & ***Insurer***
+`(A JUNCTION TABLE TO REPRESENT M-T-M relationship between ***Risk Type*** & ***Insurer***)`
 
 | RiskID | InsurerID|
 |-----------|-------------|
-| I1        | R1       |
-| I1        | R2       |
-| I2        | R1    |
+| I1        | R1          |
+| I1        | R2          |
+| I2        | R1          |
+
+
+
+Now Every Instance of ***Risk Type*** can have multiple instances of a ***Form*** ( collection of field that is associted with a risk type)
+
+Ex - For a ***Risk Type*** `House` , `Honda` might need a particular set of fields( data to be collected from insurance bearer) whereas `Bajaj` Can have a completely different set of fields for the same ***Risk Type***. so we capture this relation as
+
+|InsurerID   | RiskID | FormID    |
+|-----------|--------|-----------|
+| I1        | R1     |FOMR_1     |
+| I1        | R2     |FORM_2     |
+| I2        | R1     |FORM_3     |
+
+
 
 
