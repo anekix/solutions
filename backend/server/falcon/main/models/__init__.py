@@ -13,32 +13,60 @@ class Risk(Base):
     risk_id = Column(Integer, primary_key=True)
     risk_type = Column(String(10))
 
-    def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
 
 class Insurer(Base):
     __tablename__ = "insurer"
-    id = Column(Integer, primary_key=True)
+    insurer_id = Column(Integer, primary_key=True)
     insurer_name = Column(String(10))
     risk_id = Column(Integer, ForeignKey('risk.risk_id'))
+    # user = relationship("Risk", back_populates="insurer")
+
+
+class InsurerRiskMap(Base):
+    __tablename__ = "insurerRiskMap"
+    insurer_id = Column(Integer, ForeignKey("insurer.insurer_id"), primary_key=True)
+    risk_id = Column(Integer, ForeignKey("risk.risk_id"), primary_key=True)
+
+
+class Form(Base):
+    __tablename__ = "form"
+    form_id = Column(Integer, primary_key=True)
+    insurer_id = Column(Integer, ForeignKey("insurer.insurer_id"))
+    risk_id = Column(Integer, ForeignKey("risk.risk_id"))
+
+
+class User(Base):
+    __tablename__ = "user"
+    user_id = Column(Integer, primary_key=True)
+    form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
+
+
+class FieldType(Base):
+    __tablename__ = "fieldType"
+    type_id = Column(Integer, primary_key=True)
+    type_name = Column(Enum("TEXT", "NUMBER", "DATE", "ENUM"))
 
 
 class Field(Base):
     __tablename__ = "field"
-    type_id = Column(Integer, primary_key=True)
-    type = Column(Enum("TEXT", "NUMBER", "DATE", "ENUM"))
+    field_id = Column(Integer, primary_key=True)
+    field_name = Column(String(20))
+    type_id = Column(Integer, ForeignKey("fieldType.type_id"))
 
 
-class RiskData(Base):
-    __tablename__ = "riskData"
-    riskId = Column(Integer, ForeignKey("risk.risk_id"))
-    insurerId = Column(Integer, ForeignKey("insurer.id"))
-    # uid = Column(Integer, ForeignKey("insurer.id"), primary_key=True)
-    fields = Column(String(10), primary_key=True)
-    typeId = Column(Integer, ForeignKey("field.type_id"))
-    order = Column(Integer)
+class FormFieldMap(Base):
+    __tablename__ = "formField"
+    form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
+    field_id = Column(Integer, ForeignKey("field.field_id"), primary_key=True)
 
+
+class FormData(Base):
+    __tablename__ = "formData"
+    id = Column(Integer, primary_key=True)
+    form_id = Column(Integer, ForeignKey("form.form_id"))
+    user_id = Column(Integer, ForeignKey("user.user_id"))
+    field_id = Column(Integer, ForeignKey("field.field_id"))
+    field_value = Column(String(30))
 
 engine = create_engine('mysql://root:@localhost/foo')
 

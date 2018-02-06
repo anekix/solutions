@@ -1,6 +1,6 @@
 import falcon
 from ..models import S
-from ..models import Risk, RiskData
+from ..models import Form, FormFieldMap, Field
 from ..helpers import generate_formdata
 import json
 
@@ -15,21 +15,45 @@ class riskSingle:
             raise falcon.HTTPMissingParam(
                 'risk_id'
             )
-        result = S.query(Risk).filter(Risk.risk_id == int(risk_id)).one()
-        risk_id = result.risk_id
+        res = {'res': ''}
+        result = S.query(Field.field_name).select_from(Form).join(
+            FormFieldMap,
+            Form.form_id == FormFieldMap.form_id
+            ).join(
+                Field, 
+                FormFieldMap.field_id == Field.field_id
+            ).filter(
+                Form.risk_id == 1
+            ).all()
+        # result = select([
+        #     Form.c.risk_id,
+        #     FormFieldMap.c.field_id
+        #     ]).select_from(
+        #         Form.join(
+        #             FormFieldMap,
+        #             Form.c.form_id == FormFieldMap.c.form_id
+        #         )
+        #     )
 
-        # find fields associated with this risk
-        if risk_id:
-            fields = []
-            risk_fields = S.query(RiskData).filter(RiskData.riskId == risk_id)
-            for i in risk_fields:
-                print i.fields
-                fields.append(i.fields)
+        print result,"==="
+        for i in result:
+            print i
+        # result = S.query(Risk).filter(Risk.risk_id == int(risk_id)).one()
+        # risk_id = result.risk_id
 
-        res = dict(
-                risk=result.as_dict(),
-                fields=fields
-            )
+        # # find fields associated with this risk
+        # if risk_id:
+        #     fields = []
+        #     risk_fields = S.query(RiskData).filter(RiskData.riskId == risk_id)
+        #     for i in risk_fields:
+        #         print i.fields
+        #         fields.append(i.fields)
+
+        # res = dict(
+        #         risk=result.as_dict(),
+        #         fields=fields
+        #     )
+        res['res']=result
         resp.status = falcon.HTTP_200
         resp.body = json.dumps(res)
 
@@ -39,20 +63,63 @@ class riskAll:
     def on_get(self, req, resp, form={}, files={}):
         """Handles GET requests"""
 
-        result = S.query(Risk).all()
-        res = []
-        for i in result:
-            fields = []
-            risk_fields = S.query(RiskData).filter(RiskData.riskId == i.risk_id)
-            for j in risk_fields:
-                fields.append(j.fields)
-            print fields
-            res.append(
-                dict(
-                    risk=i.as_dict(),
-                    fields=fields
-                )
-            )
-        resp.status = falcon.HTTP_200
+        # result = S.query(Risk).all()
+        res = {
+            "Car":{
+                    "risk_id": 1,
+                    "fields": [
+                        {
+                            'field_id': 1,
+                            'field_type': "NUMBER",
+                            "field_name": "Age"
+                        },
+                        {
+                            'field_id': 2,
+                            'field_type': "TEXT",
+                            "field_name": "Name"
+                        },
+                        {
+                            'field_id': 1,
+                            'field_type': "TEXT",
+                            "field_name": "Address"
+                        }
+                    ]
+                },
+            "House": {
+                "risk_id": 2,
+                "fields": [
+                    {
+                        'field_id': 1,
+                        'field_type': "NUMBER",
+                        "field_name": "Country"
+                    },
+                    {
+                        'field_id': 2,
+                        'field_type': "TEXT",
+                        "field_name": "Name"
+                    },
+                    {
+                        'field_id': 1,
+                        'field_type': "TEXT",
+                        "field_name": "Contact"
+                    }
+                ]
+            }
+        }
+
+        
+        # for i in result:
+        #     fields = []
+        #     risk_fields = S.query(RiskData).filter(RiskData.riskId == i.risk_id)
+        #     for j in risk_fields:
+        #         fields.append(j.fields)
+        #     print fields
+        #     res.append(
+        #         dict(
+        #             risk=i.as_dict(),
+        #             fields=fields
+        #         )
+        #     )
+        # resp.status = falcon.HTTP_200
         resp.body = json.dumps(res)
 

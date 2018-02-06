@@ -57,7 +57,7 @@ class Field(Base):
 
 
 class FormFieldMap(Base):
-    __tablename__ = "formField"
+    __tablename__ = "formFieldMap"
     form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
     field_id = Column(Integer, ForeignKey("field.field_id"), primary_key=True)
 
