@@ -67,43 +67,37 @@ class riskAll:
         res = {
             "Car":{
                     "risk_id": 1,
-                    "fields": [
-                        {
+                    "fields": {
+                         "Age": {
                             'field_id': 1,
                             'field_type': "NUMBER",
-                            "field_name": "Age"
                         },
-                        {
+                        "Name":{
                             'field_id': 2,
                             'field_type': "TEXT",
-                            "field_name": "Name"
                         },
-                        {
+                        "Address":{
                             'field_id': 1,
                             'field_type': "TEXT",
-                            "field_name": "Address"
                         }
-                    ]
+                    }
                 },
             "House": {
                 "risk_id": 2,
-                "fields": [
-                    {
+                "fields": {
+                    "Country":{
                         'field_id': 1,
                         'field_type': "NUMBER",
-                        "field_name": "Country"
                     },
-                    {
+                    "Name":{
                         'field_id': 2,
                         'field_type': "TEXT",
-                        "field_name": "Name"
                     },
-                    {
+                    "Contact":{
                         'field_id': 1,
                         'field_type': "TEXT",
-                        "field_name": "Contact"
                     }
-                ]
+                }
             }
         }
 

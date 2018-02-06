@@ -3,15 +3,16 @@
     <div id="risk-selector container">
       <div class="row">
 
-
         <div class="column">
+          RISK
           <select v-model="selectedRisk" @change="setFields">
           <option v-for="(value,key) in riskData">{{key}}</option>
           </select>
         </div>
         <div class="column">
-          <select v-model="selectedField" @change="fun(field,type)">
-          <option v-for="item in fieldsForRisk">{{item.field_name}}</option>
+        FIELDS
+          <select v-model="selectedField" @change="pushDefaultField(selectedField)">
+          <option v-for="item in fieldsForRisk">{{item}}</option>
           </select>
         </div>
       </div>
@@ -23,9 +24,9 @@
     </div>
   </div>
 
-    <HelloWorld v-for="(row,index) in rows" :rs="row"/>
+    <HelloWorld v-for="(row,index) in rows" :rs.sync="row"/>
     <input type="button" class="button button-outline" value="Add Field" @click="fun">
-    <input type="button" class="button button-outline" value="Save Form" @click="fun">
+    <input type="button" class="button button-outline" value="Save Form">
 
   </div>
   
@@ -53,23 +54,36 @@ import $ from 'jquery'
 
 
 export default class Home extends Vue {
-    public rows: {title:''}[] = [];
+    public rows: {title:string, type:string}[] = [];
     riskData: any = {} ;
     selectedRisk: string="io";
+    selectedField: string="";
     fieldsForRisk: String[] = [];
+    public tmpr:any = {};
     // public selectedSegment: number = 0;
     // public data_structure:  { label: string, value: string }[] = [{
     //     label:'',
     //     value:'',
     //   }];
     public fun(): void {
-      this.rows.push({title:""});
+      this.rows.push({title:"",type:""});
   }
 
+    public pushDefaultField(selectedField:string): void {
+// alert(JSON.stringify(this.riskData));
+      this.rows.push({title:selectedField, type:this.riskData[this.selectedRisk]['fields'][selectedField]['field_type']});
+    
+      // Vue.set(object, key, value)
+      // Vue.set(this.rows, 'attachments', [])
+//                  this.$forceUpdate();
+
+
+  }
     public setFields(): void {
-      // alert(JSON.stringify(this.riskData));
       // alert(this.)
-      this.fieldsForRisk = this.riskData[this.selectedRisk].fields;
+
+      this.fieldsForRisk = Object.keys(this.riskData[this.selectedRisk].fields);
+      // alert(JSON.stringify(this.fieldsForRisk));
 
   }
 

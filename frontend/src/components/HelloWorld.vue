@@ -3,10 +3,11 @@
       <div class="container">
         <div class="row">
           <div class="column">
-            <input type="text" placeholder="Field" v-model="rs.title"/>
+            <input type="text" placeholder="Type Field Name" v-model="rs.title"/>
           </div>
           <div class="column">
   <select>
+    <option>{{rs.type}}</option>
     <option>Checkbox</option>
     <option>TextBox</option>
   </select>
@@ -23,7 +24,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
-  @Prop() public rs: { title: string }={title:''};
+  
+  @Prop({default: {}}) 
+  private rs: any;
   // @Prop() public ds: { label: string, value: string }[] = [];
   // public lds: { label: string, value: string }[] = [];
   // public asyncOK(): void {
