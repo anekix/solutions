@@ -50,6 +50,6 @@ export default class HelloWorld extends Vue {
 </script>
 <style>
 .field-segment:hover{
-  border-left:4px solid red;
+  border-left:4px solid blue;
 }
 </style>
