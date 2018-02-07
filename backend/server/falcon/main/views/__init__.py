@@ -1,8 +1,8 @@
 from main import app
-from .things import *
+from .risk import *
 
-rs = riskSingle()
-rsAll = riskAll()
+risk_single = riskSingle()
+risk_all = riskAll()
 
-app.add_route('/api/v1/risk', rs)
-app.add_route('/api/v1/risk-all', rsAll)
+app.add_route('/api/v1/risk', risk_single)
+app.add_route('/api/v1/risk-all', risk_all)

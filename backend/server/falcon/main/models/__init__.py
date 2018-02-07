@@ -68,8 +68,8 @@ class FormData(Base):
     field_id = Column(Integer, ForeignKey("field.field_id"))
     field_value = Column(String(30))
 
+# engine = create_engine('mysql://root:Ranjesh9931248492@localhost/foo')
 engine = create_engine('mysql://root:Ranjesh9931248492@localhost/foo')
-
 session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
