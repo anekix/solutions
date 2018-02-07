@@ -1,21 +1,28 @@
 <template>
-  <div class="segment">
-      <div class="container">
-        <div class="row">
-          <div class="column">
-            <input type="text" placeholder="Type Field Name" v-model="rs.title"/>
-          </div>
-          <div class="column">
-  <select>
-    <option>{{rs.type}}</option>
-    <option>Checkbox</option>
-    <option>TextBox</option>
-  </select>
-          </div>
+  <form class="field-segment">
+  <fieldset>
+    <legend>Form Builder</legend>
+    <div class="row">
+      <div class="column-sm-4">
+        <div class="input-group fluid">
+          <label for="username">Field</label>
+          <input type="text" placeholder="Type Field Name" v-model="rs.title"/>
+        </div>
       </div>
+      <div class="column-sm-10">
+        <div class="input-group fluid">
+          <label for="pwd">Type</label>     
+            <select>
+              <option>{{rs.type}}</option>
+              <option>Checkbox</option>
+              <option>TextBox</option>
+            </select>
+        </div>
       </div>
+    </div>
+  </fieldset>
+</form>
 </div>
-
 </template>
 
 <script lang="ts">
@@ -38,8 +45,11 @@ export default class HelloWorld extends Vue {
   // public ds:{questiom:string, answer:string}[] = [{
   //   question:"",answer:""
   // }];
+
 }
 </script>
 <style>
-
+.field-segment:hover{
+  border-left:4px solid red;
+}
 </style>

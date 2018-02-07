@@ -1,35 +1,52 @@
 <template>
   <div class="home">
-    <div id="risk-selector container">
-      <div class="row">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <form class="a">
+          <fieldset>
+            <legend>Form Builder</legend>
+            <div class="row">
+              <div class="column-sm-4">
+                <div class="input-group fluid">
+                  <label for="username">Risk</label>
+                    <select v-model="selectedRisk" @change="setFields">
+                      <option v-for="(value,key) in riskData">{{key}}</option>
+                    </select>
 
-        <div class="column">
-          RISK
-          <select v-model="selectedRisk" @change="setFields">
-          <option v-for="(value,key) in riskData">{{key}}</option>
-          </select>
-        </div>
-        <div class="column">
-        FIELDS
-          <select v-model="selectedField" @change="pushDefaultField(selectedField)">
-          <option v-for="item in fieldsForRisk">{{item}}</option>
-          </select>
-        </div>
+                </div>
+              </div>
+              <div class="column-sm-10">
+                <div class="input-group fluid">
+                  <label for="pwd">Fields For Risk</label>     
+                    <select v-model="selectedField" @change="pushDefaultField(selectedField)">
+                      <option v-for="item in fieldsForRisk">{{item}}</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>  
       </div>
     </div>
+  </div>
 
-  <div class="row">
-    <div class="column">
-      <span id="header"> ADD FIELDS FOR CUSTOM RISK</span>
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+              <HelloWorld class ="form-segment" v-for="(row,index) in rows" :rs.sync="row"/>
+            </div>
+          <div class="col-sm-3"></div>
     </div>
   </div>
 
-    <HelloWorld v-for="(row,index) in rows" :rs.sync="row"/>
-    <input type="button" class="button button-outline" value="Add Field" @click="fun">
-    <input type="button" class="button button-outline" value="Save Form">
-
-  </div>
-  
+        <!--<HelloWorld class ="form-segment" v-for="(row,index) in rows" :rs.sync="row"/>-->
+        <!--<button @click="" v-for="(row,index) in rows">Delete</button>-->
+      <input type="button" class="button button-outline" value="Add Field" @click="fun">
+      <input type="button" class="button button-outline" value="Save Form">
+</div>
 </template>
 
 <script lang="ts">
@@ -71,7 +88,11 @@ export default class Home extends Vue {
 
     public pushDefaultField(selectedField:string): void {
 // alert(JSON.stringify(this.riskData));
-      this.rows.push({title:selectedField, type:this.riskData[this.selectedRisk]['fields'][selectedField]['field_type']});
+      this.rows.push({
+        title:selectedField,
+        type:this.riskData[this.selectedRisk]['fields'][selectedField]['field_type']
+        }
+      );
     
       // Vue.set(object, key, value)
       // Vue.set(this.rows, 'attachments', [])
@@ -117,13 +138,10 @@ public mounted(): void {
   width:50%;
 
 }
-
-table{
-  width:50%;
-  justify:center;
+body{
+  background-color:white;
 }
-#header{
-  color:#9B4CDA;
-  font-size:13px;
+.a{
+  background-color:#F8F8F8;
 }
 </style>
