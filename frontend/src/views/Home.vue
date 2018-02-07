@@ -118,7 +118,7 @@ public mounted(): void {
 
   public fetchRisks(): void {
 
-  axios.get("api/risk-all")
+  axios.get("api/v1/risk-all")
     .then((response) => {
       console.log(response);
       this.riskData = response.data;
