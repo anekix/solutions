@@ -1,6 +1,8 @@
 ##### DATA MODEL - DESIGN DECISIONS
 
-creating a basic diagram representing the atomic relation between various entities we get this:
+ER DIAGRAM
+
+![alt text](/data/erd.png)
 
 
 There can be N number of ***Insurers*** and each ***Insurers*** can provide policies for M ***Risk Types***.
