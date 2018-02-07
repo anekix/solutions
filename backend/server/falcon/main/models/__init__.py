@@ -55,7 +55,7 @@ class Field(Base):
 
 
 class FormFieldMap(Base):
-    __tablename__ = "formField"
+    __tablename__ = "formFieldMap"
     form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
     field_id = Column(Integer, ForeignKey("field.field_id"), primary_key=True)
 
@@ -68,24 +68,10 @@ class FormData(Base):
     field_id = Column(Integer, ForeignKey("field.field_id"))
     field_value = Column(String(30))
 
-# engine = create_engine('mysql://root:Ranjesh9931248492@localhost/foo')
 engine = create_engine('mysql://root:Ranjesh9931248492@localhost/foo')
+# engine = create_engine('mysql://root:@localhost/foo')
 session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
 
-# r = Risk(risk_type="House")
 S = session()
-# s.add(r)
-
-
-# r = Risk(risk_type="Car")
-# s.add(r)
-
-# i = Insurer(insurer_name="Honda", risk_id=6)
-# s.add(i)
-
-# f = Field(type="TEXT")
-# s.add(f)
-# s.commit()
-# print s.query(Insurer).all()
