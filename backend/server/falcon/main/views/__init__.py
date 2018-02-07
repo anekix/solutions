@@ -4,5 +4,5 @@ from .things import *
 rs = riskSingle()
 rsAll = riskAll()
 
-app.add_route('/risk', rs)
-app.add_route('/risk-all', rsAll)
+app.add_route('/api/v1/risk', rs)
+app.add_route('/api/v1/risk-all', rsAll)
