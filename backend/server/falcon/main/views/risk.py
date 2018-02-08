@@ -87,6 +87,8 @@ class riskAll:
                 FormField,
                 Form.form_id == FormField.form_id
             )
+            print result
+            print 'here'
 
             data = defaultdict(lambda: defaultdict(dict))
             for i in result.all():

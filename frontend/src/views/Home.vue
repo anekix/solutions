@@ -32,13 +32,13 @@
     </div>
   </div>
 
-  <div class="container">
-      <div class="row">
+  <div class="container"> 
+      <div class="row" v-for="(row,index) in rows">
           <div class="col-sm-3"></div>
             <div class="col-sm-6">
-              <formSegment class ="form-segment" v-for="(row,index) in rows" :rs.sync="row"/>
+              <formSegment class ="form-segment" :rs.sync="row"/>
             </div>
-          <div class="col-sm-3"></div>
+          <div class="col-sm-3"><span class="close" @click="removeSegment(index)"></span></div>
     </div>
   </div>
 
@@ -80,25 +80,32 @@ export default class Home extends Vue {
       );
 
   }
+
+
+    public removeSegment(index:number): void {
+      this.rows.splice(index, 1);
+  }
+
+
     public setFields(): void {
       this.fieldsForRisk = Object.keys(this.riskData[this.selectedRisk].fields);
   }
 
-public mounted(): void {
+    public mounted(): void {
       this.fetchRisks();
-}
+  }
 
-public fetchRisks(): void {
+    public fetchRisks(): void {
 
-  axios.get("api/v1/risk-all")
-    .then((response) => {
+      axios.get("api/v1/risk-all")
+        .then((response) => {
       console.log(response);
-      this.riskData = response.data;
+      this.riskData = response.data.data;
     })
     .catch((error) => {
       console.log(error);
     });
-    }
+  }
 
 
 }
@@ -115,5 +122,9 @@ body{
 }
 .a{
   background-color:#F8F8F8;
+}
+
+.remove-segment-button:hover{
+background-color:red;
 }
 </style>
