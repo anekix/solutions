@@ -14,6 +14,9 @@
 ![alt text](/data/erd.png)
 
 
+
+## erdexplanation
+
 There can be N number of ***Insurers*** and each ***Insurers*** can provide policies for M ***Risk Types***.
 also A single ***Risk Type*** can be common to multiple ***Insurers***, This is a ***Many-To-Many*** 
 Relation between ***Risk*** and ***Insurer***
@@ -91,7 +94,18 @@ Now for every risk Bearer we would want to know the every instances of form(whic
 |       1 |       2 |
 
 
-## erdexplanation
 ## backend
+Backend consists of REST API's written in `falcon` framework of `python`.
+## #backendrunlocal
+-  Insatll requirements using `pip install -r requirements.txt` (in a virtualenv)
+-  Start API server by navigating to `/backend/server/falcon` and issue this command: `python runserver.py`  
+
 ## backendtestsuite
+- written using pyresttest 
+- we can smoketest it now using the testsuite , complete set of test can be added when we have other apis defined.
+- start API server & run test suite by navigating to `solutions/backend/server/falcon/` & `pyresttest --url="http://localhost:9070" --test=test.yaml --log=debug`
+
+
+
+
 ## frontend
