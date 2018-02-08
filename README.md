@@ -37,11 +37,13 @@ Relation between ***Risk*** and ***Insurer***
 
 `(A JUNCTION TABLE TO REPRESENT M-T-M relationship between ***Risk Type*** & ***Insurer***)`
 
-| insurer_id | risk_id |
-|------------|---------|
-|          1 |       1 |
-|          2 |       1 |
-|          1 |       2 |
+        (INSURER)
+        
+| insurer_id | risk_id  |
+|---------|-------------|
+|       1 |        1    |
+|       2 |        1    |
+|       1 |        2    |
 
 
 
