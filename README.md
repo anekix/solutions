@@ -5,7 +5,6 @@
     - [Configuration & running locally](#backendrunlocal)
     - [Backend Test Suite (pyresttest)](#backendtestsuite)
   - [Frontend - Vuejs (Typescript) ](#frontend)
-    - [running locally](#runlocalfrontend)
 
 ## erd
 
@@ -96,7 +95,7 @@ Now for every risk Bearer we would want to know the every instances of form(whic
 
 ## backend
 Backend consists of REST API's written in `falcon` framework of `python`.
-## #backendrunlocal
+## backendrunlocal
 -  Insatll requirements using `pip install -r requirements.txt` (in a virtualenv)
 -  Start API server by navigating to `/backend/server/falcon` and issue this command: `python runserver.py`  
 
@@ -109,3 +108,9 @@ Backend consists of REST API's written in `falcon` framework of `python`.
 
 
 ## frontend
+Frontend is written using vue2 that is used with class based components leveraging features of Typescript.
+- to build use `npm run build`
+- to run use `npm run serve`
+- to install required node modules use `npm install` in `/solutions/frontend` directory.
+
+
