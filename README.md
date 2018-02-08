@@ -36,7 +36,7 @@ Relation between ***Risk*** and ***Insurer***
 `(A JUNCTION TABLE TO REPRESENT M-T-M relationship between ***Risk Type*** & ***Insurer***)`
 
 | insurer_id | risk_id |
-------------|---------|
+|------------|---------|
 |          1 |       1 |
 |          2 |       1 |
 |          1 |       2 |
@@ -83,6 +83,7 @@ Every Field has a `field value` along with that we would want to know which user
 
 Now for every risk Bearer we would want to know the every instances of form(which can be multiple beacuse a user can apply to many risk defined by one or more insurer ) that he/she has filled/applied.so we have this table
 
+       (User)  
 | user_id | form_id |
 |---------|---------|
 |       1 |       1 |
