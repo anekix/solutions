@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, func, Enum
+from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, func, Enum, Boolean
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
@@ -18,7 +18,7 @@ class Insurer(Base):
     __tablename__ = "insurer"
     insurer_id = Column(Integer, primary_key=True)
     insurer_name = Column(String(10))
-    risk_id = Column(Integer, ForeignKey('risk.risk_id'))
+    # risk_id = Column(Inte ger, ForeignKey('risk.risk_id'))
     # user = relationship("Risk", back_populates="insurer")
 
 
@@ -35,43 +35,30 @@ class Form(Base):
     risk_id = Column(Integer, ForeignKey("risk.risk_id"))
 
 
+class FormField(Base):
+    __tablename__ = "formField"
+    field_id = Column(Integer, primary_key=True)
+    form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
+    field_type = Column(Enum("TEXT", "NUMBER", "DATE", "ENUM"))
+    field_label = Column(String(20))
+    mandatory = Column(Boolean, unique=False, default=True)
+
+
 class User(Base):
     __tablename__ = "user"
     user_id = Column(Integer, primary_key=True)
     form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
 
 
-class FieldType(Base):
-    __tablename__ = "fieldType"
-    type_id = Column(Integer, primary_key=True)
-    type_name = Column(Enum("TEXT", "NUMBER", "DATE", "ENUM"))
-
-
-class Field(Base):
-    __tablename__ = "field"
-    field_id = Column(Integer, primary_key=True)
-    field_name = Column(String(20))
-    type_id = Column(Integer, ForeignKey("fieldType.type_id"))
-
-
-class FormFieldMap(Base):
-    __tablename__ = "formFieldMap"
+class FormFieldValue(Base):
+    __tablename__ = "formFieldValue"
+    field_id = Column(Integer, ForeignKey("formField.field_id"), primary_key=True)
+    user_id = Column(Integer, ForeignKey("user.user_id"), primary_key=True)
     form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
-    field_id = Column(Integer, ForeignKey("field.field_id"), primary_key=True)
+    field_value = Column(String(300))
 
-
-class FormData(Base):
-    __tablename__ = "formData"
-    id = Column(Integer, primary_key=True)
-    form_id = Column(Integer, ForeignKey("form.form_id"))
-    user_id = Column(Integer, ForeignKey("user.user_id"))
-    field_id = Column(Integer, ForeignKey("field.field_id"))
-    field_value = Column(String(30))
-
-engine = create_engine('mysql://root:Ranjesh9931248492@localhost/foo')
-# engine = create_engine('mysql://root:@localhost/foo')
+# engine = create_engine('mysql://root:Ranjesh9931248492@localhost/foo')
+engine = create_engine('mysql://root:@localhost/foo')
 session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
-
-S = session()

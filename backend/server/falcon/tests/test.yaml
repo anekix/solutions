@@ -1,0 +1,29 @@
+---
+- config:
+    - testset: "Basic tests"
+    - timeout: 100  # Increase timeout from the default 10 seconds
+- test: 
+    - name: "Endpoint --> returns fields for all risks"
+    - url : "/api/v1/risk-all"
+    - method : "GET"
+    - expected_status : [200]
+    - validators :
+        - compare : {header: 'Content-Type', comparator: 'str_eq', expected: 'Application/json'}
+        - compare: {raw_body: "", comparator: "contains", expected: "data"}
+        - compare: {jsonpath_mini: "data", comparator: "type", expected: "dict"}
+
+        - compare: {raw_body: "", comparator: "contains", expected: "success"}
+        - compare: {raw_body: "", comparator: "contains", expected: "error"}
+
+
+- test:
+    - name: "Endpoint --> returns fields for a single risk given by risk id"
+    - url : "/api/v1/risk?risk_id=1"
+    - method : "GET"
+    - validators :
+        - compare : {header: 'Content-Type', comparator: 'str_eq', expected: 'Application/json'}
+        - compare: {raw_body: "", comparator: "contains", expected: "data"}
+        - compare: {jsonpath_mini: "data", comparator: "type", expected: "dict"}
+
+        - compare: {raw_body: "", comparator: "contains", expected: "success"}
+        - compare: {raw_body: "", comparator: "contains", expected: "error"}
