@@ -22,7 +22,7 @@ Relation between ***Risk*** and ***Insurer***
 
            (INSURER)        
 | insurer_id | insurer_name |
-|------------+--------------|
+|------------|--------------|
 |          1 | Honda        |
 |          2 | Bajaj        |
 
