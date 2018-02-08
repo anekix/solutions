@@ -99,6 +99,8 @@ Now for every risk Bearer we would want to know the every instances of form(whic
 Backend consists of REST API's written in `falcon` framework of `python`.
 ## backendrunlocal
 -  Insatll requirements using `pip install -r requirements.txt` (in a virtualenv)
+-  create a datbase ex: `foo` in mysql
+-  **Edit** & run setup.sh file using : `. setup.sh` in `/backend/server/falcon`
 -  Start API server by navigating to `/backend/server/falcon` and issue this command: `python runserver.py`  
 
 ## backendtestsuite
