@@ -1,6 +1,11 @@
 ## Table of Contents
-  - [GitHub](#erd)
-  - [Backend](#backend-falcon)
+  - [Erd For Data Models](#erd)
+    - [Data Model Design explanation](#erdexplanation)
+  - [Backend - falcon (python) ](#backend)
+    - [Configuration & running locally](#backendrunlocal)
+    - [Backend Test Suite (pyresttest)](#backendtestsuite)
+  - [Frontend - Vuejs (Typescript) ](#frontend)
+    - [running locally](#runlocalfrontend)
 
 ## erd
 
@@ -69,5 +74,7 @@ A seperate table for fields types removes ***Deletion anomly*** That could have 
 
 Every **Field** is associated
 
-## backend-falcon
-io
+## erdexplanation
+## backend
+## backendtestsuite
+## frontend
