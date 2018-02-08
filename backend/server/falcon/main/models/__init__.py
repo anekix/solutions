@@ -5,6 +5,18 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import pyodbc
 
+import os
+
+try:
+    mysql_user = os.environ['sql_user']
+    mysql_pass = os.environ['sql_pass']
+    mysql_database = os.environ['db_name']
+except KeyError as e:
+    print("MODIFY setup FILE & RUN AGAIN")
+    import sys
+    sys.exit()
+
+engine = create_engine('mysql://%s:%s@localhost/%s' % (mysql_user, mysql_pass, mysql_database))
 Base = declarative_base()
 
 
@@ -18,8 +30,6 @@ class Insurer(Base):
     __tablename__ = "insurer"
     insurer_id = Column(Integer, primary_key=True)
     insurer_name = Column(String(10))
-    # risk_id = Column(Inte ger, ForeignKey('risk.risk_id'))
-    # user = relationship("Risk", back_populates="insurer")
 
 
 class InsurerRiskMap(Base):
@@ -57,8 +67,6 @@ class FormFieldValue(Base):
     form_id = Column(Integer, ForeignKey("form.form_id"), primary_key=True)
     field_value = Column(String(300))
 
-# engine = create_engine('mysql://root:Ranjesh9931248492@localhost/foo')
-engine = create_engine('mysql://root:@localhost/foo')
 session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
