@@ -5,12 +5,20 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    risks:'',
+    count:0
 
   },
   mutations: {
+        setRisks(state, risks) {
+            state.risks = risks;
+        },
+
 
   },
   actions: {
+
+
 
   },
 });

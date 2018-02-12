@@ -1,7 +1,5 @@
 <template>
   <form class="field-segment">
-  <fieldset>
-    <legend>Form Builder</legend>
     <div class="row">
       <div class="col-sm-6">
         <div class="input-group fluid">
@@ -9,7 +7,7 @@
           <input type="text" placeholder="Type Field Name" v-model="rs.title"/>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-5">
         <div class="input-group fluid">
           <label for="pwd">Type</label>     
             <select v-model="rs.type">
@@ -17,6 +15,11 @@
               <option>TEXT</option>
               <option>DATE</option>
             </select>
+        </div>
+      </div>
+      <div class="col-sm-1">
+              <div class="input-group fluid">
+
         </div>
       </div>
     </div>
@@ -46,7 +49,6 @@
         </div>
       </div>
     </div>
-  </fieldset>
 </form>
 </template>
 
@@ -60,22 +62,33 @@ export default class formSegment extends Vue {
   @Prop({default: {}}) 
   private rs: any;
   private widgetTypeSeleted:string='';
-  // @Prop() public ds: { label: string, value: string }[] = [];
-  // public lds: { label: string, value: string }[] = [];
-  // public asyncOK(): void {
-  //    this.$emit("update:ds", this.ds);
- 
-  // }
-  // // this.$emit('update:ds', ds);
-
-  // public ds:{questiom:string, answer:string}[] = [{
-  //   question:"",answer:""
-  // }];
-
 }
 </script>
 <style>
+.field-segment{
+  background-color: white;
+}
+
 .field-segment:hover{
   border-left:4px solid blue;
+}
+.close{
+  // padding-top:0px !important;
+  // margin-top:0px;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    from {border-left: 4px solid blue;}
+    to {border-left: 4px solid yellow;}
+}
+.head{
+  background-color:blue;
 }
 </style>

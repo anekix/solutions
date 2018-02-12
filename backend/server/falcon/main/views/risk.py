@@ -34,7 +34,7 @@ class riskSingle:
                 FormField,
                 Form.form_id == FormField.form_id
             ).filter(
-                    Form.risk_id == risk_id
+                Form.risk_id == risk_id
             )
 
             data = defaultdict(lambda: defaultdict(dict))
@@ -87,7 +87,7 @@ class riskAll:
                 FormField,
                 Form.form_id == FormField.form_id
             )
-            print result
+            print result.all()
             print 'here'
 
             data = defaultdict(lambda: defaultdict(dict))
@@ -105,13 +105,15 @@ class riskAll:
                 data[risk_type]['risk_id'] = risk_id
                 data[risk_type]['fields'][field_label]['field_id'] = field_id
                 data[risk_type]['fields'][field_label]['field_type'] = field_type
+            final_result = []
+            for k, v in data.iteritems():
+                final_result.append({'fields': v['fields'], 'risk': k})
         except Exception as e:
             response['error'] = str(e)
             response['success'] = False
 
         # serialize result to json
-        response['data'] = data
+        response['data'] = final_result
         S.close()
         resp.content_type = "Application/json"
         resp.body = json.dumps(response)
-
