@@ -1,4 +1,5 @@
 <template>
+
   <div class="home">
     <div class="container-fluid">
       <div class="row">
@@ -18,6 +19,7 @@
               </div>
             </div>
             <div class="col-sm-8">
+            
               <i class="material-icons md-48" id="user-icon">account_circle</i>
             </div>
           </div>
@@ -84,9 +86,9 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import formSegment from '@/components/formSegment.vue'; // @ is an alias to /src
-
+import login from '@/components/login.vue';
 import axios from 'axios';
-import $ from 'jquery' 
+import $ from 'jquery';
 
 @Component({
   components: {
